@@ -15,22 +15,22 @@ import dagger.android.support.DaggerFragment
 
 open class BaseFragment : DaggerFragment() {
 
-    internal var loadingDialog: LoadingDialog? = null
+    var loadingDialog: LoadingDialog = LoadingDialog()
+
     internal var root: View? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        loadingDialog = LoadingDialog.newInstance()
         root = view
     }
 
     fun showLoading(isShowing: Boolean) {
         Log.e("LOADING", "asd $isShowing")
         if (isShowing) {
-            if (!loadingDialog?.isVisible()!!)
+            if (!loadingDialog.isAdded && !loadingDialog?.isVisible())
                 fragmentManager?.let { loadingDialog?.show(it, "LOADING")}
         } else {
-            if (loadingDialog?.isVisible()!!)
+            if (loadingDialog?.isVisible())
                 loadingDialog?.dismiss()
         }
     }

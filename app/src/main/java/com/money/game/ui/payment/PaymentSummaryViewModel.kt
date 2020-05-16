@@ -6,6 +6,9 @@ import androidx.lifecycle.ViewModel
 import com.money.game.data.model.ApiResponse
 import com.money.game.data.model.User.TransferBody
 import com.money.game.data.model.User.User
+import com.money.game.data.model.event.BuyEventInput
+import com.money.game.data.model.event.BuyEventResult
+import com.money.game.data.model.event.Event
 import com.money.game.data.rest.WebService
 import com.money.game.utils.SharedPrefHelper
 import com.money.game.utils.Utility
@@ -29,7 +32,8 @@ constructor(private val webService: WebService) : ViewModel() {
     private val errorMessage = MutableLiveData<String>()
     private val kickUser = MutableLiveData<String>()
 
-    private val transferResult = MutableLiveData<User>()
+    private val eventDetailResult = MutableLiveData<Event>()
+    private val buyEventResult = MutableLiveData<BuyEventResult>()
 
     init {
         disposable = CompositeDisposable()
@@ -47,22 +51,25 @@ constructor(private val webService: WebService) : ViewModel() {
         return loading
     }
 
-    fun getTransferResult(): LiveData<User>{
-        return transferResult
+    fun getEventDetailResult(): LiveData<Event>{
+        return eventDetailResult
     }
 
-    fun deductBalance(amount: Double){
-        val body: TransferBody = TransferBody()
-        body.type = "transfer"
-        body.amount = amount
+    fun getBuyEventResult(): LiveData<BuyEventResult>{
+        return buyEventResult
+    }
+
+    fun buyEvent(id: Int){
+        val body: BuyEventInput = BuyEventInput()
+        body.eventId = id
         loading.setValue(true)
-        disposable?.add(webService.modifyBalance("Bearer "+SharedPrefHelper.apiToken, body).subscribeOn(Schedulers.io())
+        disposable?.add(webService.buyEvent("Bearer "+SharedPrefHelper.apiToken, body).subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread()).subscribeWith(object :
-                DisposableSingleObserver<ApiResponse<User>>() {
-                override fun onSuccess(response: ApiResponse<User>) {
+                DisposableSingleObserver<ApiResponse<BuyEventResult>>() {
+                override fun onSuccess(response: ApiResponse<BuyEventResult>) {
                     loading.setValue(false)
                     if (response.success)
-                        transferResult.postValue(response.data)
+                        buyEventResult.postValue(response.data)
                     else {
                         errorMessage.postValue(response.message)
                     }
@@ -76,4 +83,32 @@ constructor(private val webService: WebService) : ViewModel() {
             })
         )
     }
+
+
+
+
+    fun getEventDetail(id:Int){
+        loading.setValue(true)
+        disposable?.add(webService.getEventDetail("Bearer "+SharedPrefHelper.apiToken, id).subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread()).subscribeWith(object :
+                DisposableSingleObserver<ApiResponse<Event>>() {
+                override fun onSuccess(response: ApiResponse<Event>) {
+                    loading.setValue(false)
+                    if (response.success)
+                        eventDetailResult.postValue(response.data)
+                    else {
+                        errorMessage.postValue(response.message)
+                    }
+                }
+
+                override fun onError(e: Throwable) {
+
+                    Utility.handleAPIError(e, errorMessage, kickUser)
+                    loading.setValue(false)
+                }
+            })
+        )
+    }
+
+
 }

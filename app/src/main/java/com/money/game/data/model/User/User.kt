@@ -1,6 +1,7 @@
 package com.money.game.data.model.User
 
 import com.google.gson.annotations.SerializedName
+import com.money.game.data.model.event.Category
 import java.io.Serializable
 
 class User() : Serializable{
@@ -19,5 +20,7 @@ class User() : Serializable{
     var apiToken: String = ""
 
     var balance: Double = 0.0
+
+    var categories: List<Category> = ArrayList()
 
 }

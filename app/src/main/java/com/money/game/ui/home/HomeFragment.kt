@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.money.game.R
 import com.money.game.base.BaseFragment
 import com.money.game.data.model.User.User
+import com.money.game.data.model.event.Category
 import com.money.game.databinding.FragmentHomeBinding
 import com.money.game.di.util.ViewModelFactory
 import com.money.game.utils.SharedPrefHelper
@@ -28,6 +29,7 @@ class HomeFragment: BaseFragment(){
     internal var viewModel: HomeActivityViewModel? =null
 
     var binding : FragmentHomeBinding? = null
+    var categories: List<Category> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +40,7 @@ class HomeFragment: BaseFragment(){
         viewModel?.getAuthErrorMessage()?.observe(this, Observer { kickUser(it) })
         viewModel?.getLoading()?.observe(this, Observer { this.showLoading(it) })
         viewModel?.getUserDetailResult()?.observe(this, Observer { onUserDetailReturn(it) })
+        viewModel?.getUserCategoryListResult()?.observe(this, Observer { onCategoryListResultReturned(it) })
     }
 
     override fun onCreateView(
@@ -50,13 +53,26 @@ class HomeFragment: BaseFragment(){
         updateData()
         binding?.llDining?.setOnClickListener({
             var homeActivity:HomeActivity? = activity as? HomeActivity
-
-            homeActivity?.showMapFragment()
+            if(categories.size>0)
+                homeActivity?.showMapFragment(categories.get(0))
         })
         binding?.ivLogout?.setOnClickListener({
             showLogoutConfirmation()
         })
         return v;
+    }
+
+    fun onCategoryListResultReturned(user: User){
+        val categories = user.categories
+        this.categories = categories
+        var dining = categories.get(0)
+
+        binding?.tvDiningLvl?.setText(""+dining.level)
+        var exp = dining.experience.rem(50)
+        if(exp==0)
+            exp = 50
+        binding?.tvDiningExp?.setText(""+exp+"/50")
+
     }
 
     fun showLogoutConfirmation(){
@@ -86,6 +102,7 @@ class HomeFragment: BaseFragment(){
 
     override fun onResume() {
         super.onResume()
+        viewModel?.getCategoryList()
     }
 
     fun onUserDetailReturn(user: User){

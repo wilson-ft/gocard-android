@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -9,7 +9,7 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:background="@color/backgroundMain">
-            <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:orientation="vertical" android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/content">
@@ -103,6 +103,7 @@
                     android:gravity="center_vertical"/>
 
                 <LinearLayout
+                    android:id="@+id/ll_row_1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="18dp"
@@ -120,7 +121,7 @@
                         android:background="@drawable/bg_category_card">
                         <ImageView
                             android:layout_width="42dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="72dp"
                             android:src="@drawable/avatar_1"
                             android:layout_gravity="center_horizontal"/>
 
@@ -133,6 +134,8 @@
                             android:textSize="14sp"
                             android:fontFamily="@font/ssp_regular"
                             android:text="Dining"
+                            android:ellipsize="end"
+                            android:lines="1"
                             android:gravity="center_vertical"/>
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -151,15 +154,16 @@
                                 android:gravity="center_vertical"/>
 
                             <TextView
+                                android:id="@+id/tv_dining_lvl"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                app:layout_constraintTop_toBottomOf="@id/ll_balance"
-                                app:layout_constraintLeft_toLeftOf="parent"
+                                android:layout_height="match_parent"
                                 android:layout_marginLeft="10dp"
-                                android:textSize="14sp"
                                 android:fontFamily="@font/ssp_regular"
+                                android:gravity="center_vertical"
                                 android:text="1"
-                                android:gravity="center_vertical"/>
+                                android:textSize="14sp"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/ll_balance" />
                         </LinearLayout>
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -178,15 +182,16 @@
                                 android:gravity="center_vertical"/>
 
                             <TextView
+                                android:id="@+id/tv_dining_exp"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                app:layout_constraintTop_toBottomOf="@id/ll_balance"
-                                app:layout_constraintLeft_toLeftOf="parent"
+                                android:layout_height="match_parent"
                                 android:layout_marginLeft="10dp"
-                                android:textSize="14sp"
                                 android:fontFamily="@font/ssp_regular"
+                                android:gravity="center_vertical"
                                 android:text="45/50"
-                                android:gravity="center_vertical"/>
+                                android:textSize="14sp"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/ll_balance" />
                         </LinearLayout>
 
                     </LinearLayout>
@@ -203,8 +208,8 @@
                         android:background="@drawable/bg_category_card">
                         <ImageView
                             android:layout_width="42dp"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/avatar_1"
+                            android:layout_height="72dp"
+                            android:src="@drawable/avatar_2"
                             android:layout_gravity="center_horizontal"/>
 
                         <TextView
@@ -216,6 +221,8 @@
                             android:textSize="14sp"
                             android:fontFamily="@font/ssp_regular"
                             android:text="Shopping"
+                            android:ellipsize="end"
+                            android:lines="1"
                             android:gravity="center_vertical"/>
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -268,7 +275,7 @@
                                 android:layout_marginLeft="10dp"
                                 android:textSize="14sp"
                                 android:fontFamily="@font/ssp_regular"
-                                android:text="45/50"
+                                android:text="0/50"
                                 android:gravity="center_vertical"/>
                         </LinearLayout>
 
@@ -285,8 +292,8 @@
                         android:background="@drawable/bg_category_card">
                         <ImageView
                             android:layout_width="42dp"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/avatar_1"
+                            android:layout_height="72dp"
+                            android:src="@drawable/avatar_6"
                             android:layout_gravity="center_horizontal"/>
 
                         <TextView
@@ -298,6 +305,269 @@
                             android:textSize="14sp"
                             android:fontFamily="@font/ssp_regular"
                             android:text="Traveling"
+                            android:ellipsize="end"
+                            android:lines="1"
+                            android:gravity="center_vertical"/>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:layout_constraintTop_toBottomOf="@id/ll_balance"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                android:textSize="14sp"
+                                android:fontFamily="@font/ssp_regular"
+                                android:text="Level"
+                                android:textColor="@color/textSecondary"
+                                android:gravity="center_vertical"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:layout_constraintTop_toBottomOf="@id/ll_balance"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                android:layout_marginLeft="10dp"
+                                android:textSize="14sp"
+                                android:fontFamily="@font/ssp_regular"
+                                android:text="1"
+                                android:gravity="center_vertical"/>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:layout_constraintTop_toBottomOf="@id/ll_balance"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                android:textSize="14sp"
+                                android:fontFamily="@font/ssp_regular"
+                                android:text="Exp"
+                                android:textColor="@color/textSecondary"
+                                android:gravity="center_vertical"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:layout_constraintTop_toBottomOf="@id/ll_balance"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                android:layout_marginLeft="10dp"
+                                android:textSize="14sp"
+                                android:fontFamily="@font/ssp_regular"
+                                android:text="0/50"
+                                android:gravity="center_vertical"/>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/ll_row_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toBottomOf="@id/ll_row_1"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_marginHorizontal="32dp"
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="12dp"
+                        android:background="@drawable/bg_category_card">
+                        <ImageView
+                            android:layout_width="42dp"
+                            android:layout_height="72dp"
+                            android:src="@drawable/avatar_3"
+                            android:layout_gravity="center_horizontal"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toBottomOf="@id/ll_balance"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            android:layout_marginTop="6dp"
+                            android:textSize="14sp"
+                            android:fontFamily="@font/ssp_regular"
+                            android:text="Daily Expense"
+                            android:ellipsize="end"
+                            android:lines="1"
+                            android:gravity="center_vertical"/>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:layout_constraintTop_toBottomOf="@id/ll_balance"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                android:textSize="14sp"
+                                android:fontFamily="@font/ssp_regular"
+                                android:text="Level"
+                                android:textColor="@color/textSecondary"
+                                android:gravity="center_vertical"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:layout_constraintTop_toBottomOf="@id/ll_balance"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                android:layout_marginLeft="10dp"
+                                android:textSize="14sp"
+                                android:fontFamily="@font/ssp_regular"
+                                android:text="1"
+                                android:gravity="center_vertical"/>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:layout_constraintTop_toBottomOf="@id/ll_balance"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                android:textSize="14sp"
+                                android:fontFamily="@font/ssp_regular"
+                                android:text="Exp"
+                                android:textColor="@color/textSecondary"
+                                android:gravity="center_vertical"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:layout_constraintTop_toBottomOf="@id/ll_balance"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                android:layout_marginLeft="10dp"
+                                android:textSize="14sp"
+                                android:fontFamily="@font/ssp_regular"
+                                android:text="0/50"
+                                android:gravity="center_vertical"/>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="8dp"
+                        android:layout_height="0dp"/>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="12dp"
+                        android:background="@drawable/bg_category_card">
+                        <ImageView
+                            android:layout_width="42dp"
+                            android:layout_height="72dp"
+                            android:src="@drawable/avatar_4"
+                            android:layout_gravity="center_horizontal"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toBottomOf="@id/ll_balance"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            android:layout_marginTop="6dp"
+                            android:textSize="14sp"
+                            android:fontFamily="@font/ssp_regular"
+                            android:text="Big Ticket"
+                            android:ellipsize="end"
+                            android:lines="1"
+                            android:gravity="center_vertical"/>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:layout_constraintTop_toBottomOf="@id/ll_balance"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                android:textSize="14sp"
+                                android:fontFamily="@font/ssp_regular"
+                                android:text="Level"
+                                android:textColor="@color/textSecondary"
+                                android:gravity="center_vertical"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:layout_constraintTop_toBottomOf="@id/ll_balance"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                android:layout_marginLeft="10dp"
+                                android:textSize="14sp"
+                                android:fontFamily="@font/ssp_regular"
+                                android:text="1"
+                                android:gravity="center_vertical"/>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:layout_constraintTop_toBottomOf="@id/ll_balance"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                android:textSize="14sp"
+                                android:fontFamily="@font/ssp_regular"
+                                android:text="Exp"
+                                android:textColor="@color/textSecondary"
+                                android:gravity="center_vertical"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:layout_constraintTop_toBottomOf="@id/ll_balance"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                android:layout_marginLeft="10dp"
+                                android:textSize="14sp"
+                                android:fontFamily="@font/ssp_regular"
+                                android:text="0/50"
+                                android:gravity="center_vertical"/>
+                        </LinearLayout>
+
+                    </LinearLayout>
+                    <View
+                        android:layout_width="8dp"
+                        android:layout_height="0dp"/>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="12dp"
+                        android:background="@drawable/bg_category_card">
+                        <ImageView
+                            android:layout_width="42dp"
+                            android:layout_height="72dp"
+                            android:src="@drawable/avatar_5"
+                            android:layout_gravity="center_horizontal"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toBottomOf="@id/ll_balance"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            android:layout_marginTop="6dp"
+                            android:textSize="14sp"
+                            android:fontFamily="@font/ssp_regular"
+                            android:text="Airport Lounge"
+                            android:lines="1"
+                            android:ellipsize="end"
                             android:gravity="center_vertical"/>
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -357,6 +627,7 @@
                     </LinearLayout>
 
                 </LinearLayout>
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
     </LinearLayout>

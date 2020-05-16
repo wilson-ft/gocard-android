@@ -10,10 +10,13 @@ import androidx.lifecycle.ViewModelProviders
 import com.money.game.R
 import com.money.game.base.BaseActivity
 import com.money.game.data.model.User.User
+import com.money.game.data.model.event.BuyEventResult
+import com.money.game.data.model.event.Event
 import com.money.game.databinding.ActivityPaymentSummaryBinding
 import com.money.game.di.util.ViewModelFactory
 import com.money.game.ui.home.HomeActivityViewModel
 import com.money.game.utils.SharedPrefHelper
+import com.money.game.utils.Utility
 import javax.inject.Inject
 
 class PaymentSummaryActivity : BaseActivity(){
@@ -25,11 +28,14 @@ class PaymentSummaryActivity : BaseActivity(){
 
     var binding: ActivityPaymentSummaryBinding?=null
 
+    var event:Event? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_payment_summary)
 
+        event = intent.getSerializableExtra("EVENT") as Event
 
         viewModel =
             ViewModelProviders.of(this, viewModelFactory).get(PaymentSummaryViewModel::class.java)
@@ -37,8 +43,8 @@ class PaymentSummaryActivity : BaseActivity(){
         viewModel?.getErrorMessage()?.observe(this, Observer { this.showSnackBar(it) })
         viewModel?.getAuthErrorMessage()?.observe(this, Observer { kickUser(it) })
         viewModel?.getLoading()?.observe(this, Observer { this.showLoading(it) })
-        viewModel?.getTransferResult()?.observe(this, Observer { onTransferResultReturned(it) })
-
+        viewModel?.getBuyEventResult()?.observe(this, Observer { onTransferResultReturned(it) })
+        viewModel?.getEventDetailResult()?.observe(this, Observer { updateInfo(it) })
 
         binding?.btnPay?.isEnabled= false
         binding?.etPin?.addTextChangedListener(object : TextWatcher {
@@ -57,13 +63,21 @@ class PaymentSummaryActivity : BaseActivity(){
         })
 
         binding?.btnPay?.setOnClickListener({
-            viewModel?.deductBalance(15.0)
+            viewModel?.buyEvent(event?.id!!)
         })
+        updateInfo(event!!)
     }
 
-    fun onTransferResultReturned(user:User){
-        SharedPrefHelper.updateUser(user)
+    fun updateInfo(event:Event){
+        binding?.tvName?.setText(event.name)
+        binding?.tvLocation?.setText(event.locatedAt)
+        binding?.tvPrice?.setText("S$"+Utility.currencyFormat(""+event.price))
+    }
+
+    fun onTransferResultReturned(buyEventResult: BuyEventResult){
         var intent = Intent(this, PaymentSuccessActivity::class.java)
+        intent.putExtra("RESULT", buyEventResult)
+        intent.putExtra("EVENT", event)
         startActivity(intent)
         finish()
     }

@@ -4,13 +4,12 @@ import android.os.Bundle
 import android.view.View
 import android.view.View.OnClickListener
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProviders
 import com.money.game.R
 import com.money.game.base.BaseActivity
+import com.money.game.data.model.event.Category
 import com.money.game.databinding.ActivityHomeBinding
 import com.money.game.di.util.ViewModelFactory
-import com.money.game.ui.faceauthentication.FaceAuthenticationActivityViewModel
 import com.money.game.ui.map.MapFragment
 import javax.inject.Inject
 
@@ -58,7 +57,8 @@ class HomeActivity:BaseActivity(), OnClickListener{
         ft.commit()
     }
 
-    fun showMapFragment() {
+    fun showMapFragment(category:Category) {
+        mapFragment.setSelectedCategory(category)
         if(mapFragment.isVisible)
             return
         val ft = supportFragmentManager.beginTransaction()

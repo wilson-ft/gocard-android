@@ -31,7 +31,7 @@ open class BaseActivity: DaggerAppCompatActivity() {
 
     public fun showLoading(isShowing: Boolean){
         if (isShowing) {
-            if (!loadingDialog.isVisible())
+            if (!loadingDialog.isAdded && !loadingDialog.isVisible())
                 loadingDialog.show(supportFragmentManager, "LOADING")
 
         } else {

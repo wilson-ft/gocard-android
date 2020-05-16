@@ -5,6 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.money.game.data.model.ApiResponse
 import com.money.game.data.model.User.User
+import com.money.game.data.model.event.Category
+import com.money.game.data.model.event.Event
 import com.money.game.data.rest.WebService
 import com.money.game.utils.SharedPrefHelper
 import com.money.game.utils.Utility
@@ -12,11 +14,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
-import java.io.File
-import java.util.HashMap
 import javax.inject.Inject
 
 class HomeActivityViewModel @Inject
@@ -29,6 +26,10 @@ constructor(private val webService: WebService) : ViewModel() {
     private val kickUser = MutableLiveData<String>()
 
     private val userDetailResult = MutableLiveData<User>()
+
+    private val eventDetailResult = MutableLiveData<Event>()
+
+    private val userCategoryListResult = MutableLiveData<User>()
 
     init {
         disposable = CompositeDisposable()
@@ -50,6 +51,15 @@ constructor(private val webService: WebService) : ViewModel() {
         return userDetailResult
     }
 
+
+    fun getEventDetailResult(): LiveData<Event>{
+        return eventDetailResult
+    }
+
+    fun getUserCategoryListResult(): LiveData<User>{
+        return userCategoryListResult
+    }
+
     fun getUserDetail(){
         loading.setValue(true)
         disposable?.add(webService.getUserDetail("Bearer "+SharedPrefHelper.apiToken).subscribeOn(Schedulers.io())
@@ -68,6 +78,50 @@ constructor(private val webService: WebService) : ViewModel() {
 
                     Utility.handleAPIError(e, errorMessage, kickUser)
                     loading.setValue(false)
+                }
+            })
+        )
+    }
+
+    fun getEventDetail(id:Int){
+        loading.setValue(true)
+        disposable?.add(webService.getEventDetail("Bearer "+SharedPrefHelper.apiToken, id).subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread()).subscribeWith(object :
+                DisposableSingleObserver<ApiResponse<Event>>() {
+                override fun onSuccess(response: ApiResponse<Event>) {
+                    loading.setValue(false)
+                    if (response.success)
+                        eventDetailResult.postValue(response.data)
+                    else {
+                        errorMessage.postValue(response.message)
+                    }
+                }
+
+                override fun onError(e: Throwable) {
+
+                    Utility.handleAPIError(e, errorMessage, kickUser)
+                    loading.setValue(false)
+                }
+            })
+        )
+    }
+
+
+    fun getCategoryList(){
+        disposable?.add(webService.getCategories("Bearer "+SharedPrefHelper.apiToken).subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread()).subscribeWith(object :
+                DisposableSingleObserver<ApiResponse<User>>() {
+                override fun onSuccess(response: ApiResponse<User>) {
+                    if (response.success)
+                        userCategoryListResult.postValue(response.data)
+                    else {
+                        errorMessage.postValue(response.message)
+                    }
+                }
+
+                override fun onError(e: Throwable) {
+
+                    Utility.handleAPIError(e, errorMessage, kickUser)
                 }
             })
         )

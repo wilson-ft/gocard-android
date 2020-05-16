@@ -17,6 +17,7 @@
         android:layout_marginTop="32dp"
         android:gravity="center">
         <ImageView
+            android:id="@+id/iv_logo"
             android:layout_width="46dp"
             android:layout_height="40dp"
             android:src="@drawable/logo_mcd"/>
@@ -26,6 +27,7 @@
             android:orientation="vertical"
             android:layout_marginLeft="16dp">
             <TextView
+                android:id="@+id/tv_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="McDonald's"
@@ -33,6 +35,7 @@
                 android:textSize="20sp"
                 android:textColor="@color/textBlack"/>
             <TextView
+                android:id="@+id/tv_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="30% Cashback"
@@ -52,6 +55,7 @@
         android:textColor="@color/textBlack"/>
 
     <TextView
+        android:id="@+id/tv_address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -71,6 +75,7 @@
         android:textColor="@color/textBlack"/>
 
     <TextView
+        android:id="@+id/tv_location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
