@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_dialog"
+    android:paddingBottom="28dp">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:src="@drawable/cover_mcd"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingHorizontal="26dp"
+        android:layout_marginTop="32dp"
+        android:gravity="center">
+        <ImageView
+            android:layout_width="46dp"
+            android:layout_height="40dp"
+            android:src="@drawable/logo_mcd"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="16dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="McDonald's"
+                android:fontFamily="@font/ssp_semibold"
+                android:textSize="20sp"
+                android:textColor="@color/textBlack"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="30% Cashback"
+                android:textSize="18sp"
+                android:textColor="@color/success"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="26dp"
+        android:layout_marginHorizontal="26dp"
+        android:text="Address"
+        android:fontFamily="@font/ssp_semibold"
+        android:textSize="16sp"
+        android:textColor="@color/textBlack"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginHorizontal="26dp"
+        android:text="68 Orchard Rd, #B1-23 24 Plaza, Singapore 238839"
+        android:fontFamily="@font/ssp_semibold"
+        android:textSize="16sp"
+        android:textColor="@color/textSecondary"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="26dp"
+        android:text="Located at"
+        android:fontFamily="@font/ssp_semibold"
+        android:textSize="16sp"
+        android:textColor="@color/textBlack"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginHorizontal="26dp"
+        android:text="Plaza Singapura"
+        android:fontFamily="@font/ssp_semibold"
+        android:textSize="16sp"
+        android:textColor="@color/textSecondary"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="26dp"
+        android:text="Opening Hours"
+        android:fontFamily="@font/ssp_semibold"
+        android:textSize="16sp"
+        android:textColor="@color/textBlack"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginHorizontal="26dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Opens now"
+            android:textSize="16sp"
+            android:textColor="@color/success"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="9am - 10pm"
+            android:textSize="16sp"
+            android:layout_marginLeft="12dp"
+            android:textColor="@color/textSecondary"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_pay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:paddingHorizontal="54dp"
+        android:text="Pay Now"
+        android:layout_marginTop="48dp"
+        android:drawableLeft="@drawable/ic_qr"
+        android:drawablePadding="12dp"/>
+
+</LinearLayout>
